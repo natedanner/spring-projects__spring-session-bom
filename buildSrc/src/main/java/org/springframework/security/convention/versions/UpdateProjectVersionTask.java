@@ -54,7 +54,7 @@ public abstract class UpdateProjectVersionTask extends DefaultTask {
 		}
 		System.out.println("Updating the project version in " + Project.GRADLE_PROPERTIES + " from " + currentVersion
 				+ " to " + nextVersion);
-		FileUtils.replaceFileText(gradlePropertiesFile, (gradlePropertiesText) -> {
+		FileUtils.replaceFileText(gradlePropertiesFile, gradlePropertiesText -> {
 			gradlePropertiesText = gradlePropertiesText.replace("version=" + currentVersion, "version=" + nextVersion);
 			return gradlePropertiesText;
 		});

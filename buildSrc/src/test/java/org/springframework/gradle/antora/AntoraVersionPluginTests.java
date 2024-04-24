@@ -117,7 +117,7 @@ class AntoraVersionPluginTests {
 		assertThat(task).isInstanceOf(CheckAntoraVersionTask.class);
 
 		CheckAntoraVersionTask checkAntoraVersionTask = (CheckAntoraVersionTask) task;
-		assertThatExceptionOfType(GradleException.class).isThrownBy(() -> checkAntoraVersionTask.check());
+		assertThatExceptionOfType(GradleException.class).isThrownBy(checkAntoraVersionTask::check);
 	}
 
 	@Test
@@ -132,7 +132,7 @@ class AntoraVersionPluginTests {
 		assertThat(task).isInstanceOf(CheckAntoraVersionTask.class);
 
 		CheckAntoraVersionTask checkAntoraVersionTask = (CheckAntoraVersionTask) task;
-		assertThatIOException().isThrownBy(() -> checkAntoraVersionTask.check());
+		assertThatIOException().isThrownBy(checkAntoraVersionTask::check);
 	}
 
 	@Test
@@ -149,7 +149,7 @@ class AntoraVersionPluginTests {
 		assertThat(task).isInstanceOf(CheckAntoraVersionTask.class);
 
 		CheckAntoraVersionTask checkAntoraVersionTask = (CheckAntoraVersionTask) task;
-		assertThatExceptionOfType(GradleException.class).isThrownBy(() -> checkAntoraVersionTask.check());
+		assertThatExceptionOfType(GradleException.class).isThrownBy(checkAntoraVersionTask::check);
 
 	}
 

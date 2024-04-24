@@ -83,13 +83,11 @@ public class UpdateDependenciesPlugin implements Plugin<Project> {
 						resolution.componentSelection(new Action<ComponentSelectionRulesWithCurrent>() {
 							@Override
 							public void execute(ComponentSelectionRulesWithCurrent components) {
-								updateDependenciesSettings.getExcludes().getActions().forEach((action) -> {
-									components.all(action);
-								});
-								updateDependenciesSettings.getExcludes().getComponents().forEach((action) -> {
-									action.execute(components);
-								});
-								components.all((selection) -> {
+								updateDependenciesSettings.getExcludes().getActions().forEach(action ->
+									components.all(action));
+								updateDependenciesSettings.getExcludes().getComponents().forEach(action ->
+									action.execute(components));
+								components.all(selection -> {
 									ModuleComponentIdentifier candidate = selection.getCandidate();
 									if (candidate.getGroup().startsWith("org.apache.directory.") && !candidate.getVersion().equals(selection.getCurrentVersion())) {
 										selection.reject("org.apache.directory.* has breaking changes in newer versions");
@@ -113,9 +111,8 @@ public class UpdateDependenciesPlugin implements Plugin<Project> {
 			return;
 		}
 		Map<String, List<DependencyOutdated>> groups = new LinkedHashMap<>();
-		dependencies.forEach(outdated -> {
-			groups.computeIfAbsent(outdated.getGroup(), (key) -> new ArrayList<>()).add(outdated);
-		});
+		dependencies.forEach(outdated ->
+			groups.computeIfAbsent(outdated.getGroup(), key -> new ArrayList<>()).add(outdated));
 		List<DependencyOutdated> nimbusds = groups.getOrDefault("com.nimbusds", new ArrayList<>());
 		DependencyOutdated oidcSdc = nimbusds.stream().filter(d -> d.getName().equals(OIDC_SDK_NAME)).findFirst().orElseGet(() -> null);
 		if(oidcSdc != null) {
@@ -136,12 +133,12 @@ public class UpdateDependenciesPlugin implements Plugin<Project> {
 		Mono<GitHubApi.FindCreateIssueResult> createIssueResult = createIssueResultMono(updateDependenciesSettings);
 		List<File> filesWithDependencies = updateDependenciesSettings.getFiles().get();
 		groups.forEach((group, outdated) -> {
-			outdated.forEach((dependency) -> {
+			outdated.forEach(dependency -> {
 				String ga = dependency.getGroup() + ":" + dependency.getName() + ":";
 				String originalDependency = ga + dependency.getVersion();
 				String replacementDependency = ga + updatedVersion(dependency);
 				System.out.println("Update " + originalDependency + " to " + replacementDependency);
-				filesWithDependencies.forEach((fileWithDependency) -> {
+				filesWithDependencies.forEach(fileWithDependency -> {
 					updateDependencyInlineVersion(fileWithDependency, dependency);
 					updateDependencyWithVersionVariable(fileWithDependency, gradlePropertiesFile, dependency);
 				});
@@ -191,7 +188,7 @@ public class UpdateDependenciesPlugin implements Plugin<Project> {
 		return () -> {
 			List<File> result = new ArrayList<>();
 			result.add(project.getBuildFile());
-			project.getChildProjects().values().forEach((childProject) ->
+			project.getChildProjects().values().forEach(childProject ->
 					result.add(childProject.getBuildFile())
 			);
 			result.add(project.getRootProject().file("buildSrc/build.gradle"));
@@ -201,7 +198,7 @@ public class UpdateDependenciesPlugin implements Plugin<Project> {
 
 	static Action<ComponentSelectionWithCurrent> excludeWithRegex(String regex, String reason) {
 		Pattern pattern = Pattern.compile(regex);
-		return (selection) -> {
+		return selection -> {
 			String candidateVersion = selection.getCandidate().getVersion();
 			if (pattern.matcher(candidateVersion).matches()) {
 				selection.reject(candidateVersion + " is not allowed because it is " + reason);
@@ -220,7 +217,7 @@ public class UpdateDependenciesPlugin implements Plugin<Project> {
 		if (!gradlePropertiesFile.exists()) {
 			return;
 		}
-		FileUtils.replaceFileText(gradlePropertiesFile, (gradlePropertiesText) -> {
+		FileUtils.replaceFileText(gradlePropertiesFile, gradlePropertiesText -> {
 			String ga = dependency.getGroup() + ":" + dependency.getName() + ":";
 			Pattern pattern = Pattern.compile("\"" + ga + "\\$\\{?([^'\"]+?)\\}?\"");
 			String buildFileText = FileUtils.readString(scanFile);

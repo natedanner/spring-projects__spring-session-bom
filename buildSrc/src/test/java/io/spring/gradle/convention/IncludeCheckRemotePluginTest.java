@@ -47,7 +47,7 @@ class IncludeCheckRemotePluginTest {
 		this.rootProject = ProjectBuilder.builder().build();
 		this.rootProject.getPluginManager().apply(IncludeCheckRemotePlugin.class);
 		this.rootProject.getExtensions().configure(IncludeCheckRemotePlugin.IncludeCheckRemoteExtension.class,
-				(includeCheckRemoteExtension) -> {
+				includeCheckRemoteExtension -> {
 					includeCheckRemoteExtension.setProperty("repository", "my-project/my-repository");
 					includeCheckRemoteExtension.setProperty("ref", "main");
 				});
@@ -61,7 +61,7 @@ class IncludeCheckRemotePluginTest {
 		this.rootProject = ProjectBuilder.builder().build();
 		this.rootProject.getPluginManager().apply(IncludeCheckRemotePlugin.class);
 		this.rootProject.getExtensions().configure(IncludeCheckRemotePlugin.IncludeCheckRemoteExtension.class,
-				(includeCheckRemoteExtension) -> {
+				includeCheckRemoteExtension -> {
 					includeCheckRemoteExtension.setProperty("repository", "my-project/my-repository");
 					includeCheckRemoteExtension.setProperty("ref", "main");
 					includeCheckRemoteExtension.setProperty("tasks", Arrays.asList("clean", "build", "test"));
@@ -76,7 +76,7 @@ class IncludeCheckRemotePluginTest {
 		this.rootProject = ProjectBuilder.builder().build();
 		this.rootProject.getPluginManager().apply(IncludeCheckRemotePlugin.class);
 		this.rootProject.getExtensions().configure(IncludeCheckRemotePlugin.IncludeCheckRemoteExtension.class,
-				(includeCheckRemoteExtension) -> {
+				includeCheckRemoteExtension -> {
 					includeCheckRemoteExtension.setProperty("repository", "my-project/my-repository");
 					includeCheckRemoteExtension.setProperty("ref", "main");
 					includeCheckRemoteExtension.setProperty("initScripts", Arrays.asList("spring-security-ci.gradle"));
@@ -94,7 +94,7 @@ class IncludeCheckRemotePluginTest {
 		this.rootProject = ProjectBuilder.builder().build();
 		this.rootProject.getPluginManager().apply(IncludeCheckRemotePlugin.class);
 		this.rootProject.getExtensions().configure(IncludeCheckRemotePlugin.IncludeCheckRemoteExtension.class,
-				(includeCheckRemoteExtension) -> {
+				includeCheckRemoteExtension -> {
 					includeCheckRemoteExtension.setProperty("repository", "my-project/my-repository");
 					includeCheckRemoteExtension.setProperty("ref", "main");
 					includeCheckRemoteExtension.setProperty("projectProperties", projectProperties);
@@ -110,7 +110,7 @@ class IncludeCheckRemotePluginTest {
 		this.rootProject = ProjectBuilder.builder().build();
 		this.rootProject.getPluginManager().apply(IncludeCheckRemotePlugin.class);
 		this.rootProject.getExtensions().configure(IncludeCheckRemotePlugin.IncludeCheckRemoteExtension.class,
-				(includeCheckRemoteExtension) -> {
+				includeCheckRemoteExtension -> {
 					includeCheckRemoteExtension.setProperty("repository", "my-project/my-repository");
 					includeCheckRemoteExtension.setProperty("ref", "main");
 				});
@@ -126,7 +126,7 @@ class IncludeCheckRemotePluginTest {
 		this.rootProject = ProjectBuilder.builder().build();
 		this.rootProject.getPluginManager().apply(IncludeCheckRemotePlugin.class);
 		this.rootProject.getExtensions().configure(IncludeCheckRemotePlugin.IncludeCheckRemoteExtension.class,
-				(includeCheckRemoteExtension) -> {
+				includeCheckRemoteExtension -> {
 					includeCheckRemoteExtension.setProperty("repository", "my-project/my-repository");
 					includeCheckRemoteExtension.setProperty("ref", "main");
 				});

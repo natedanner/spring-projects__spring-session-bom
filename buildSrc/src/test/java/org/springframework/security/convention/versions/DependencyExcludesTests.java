@@ -68,7 +68,7 @@ public class DependencyExcludesTests {
 
 	private ComponentSelection executeCreateExcludeMinorVersionBump(String currentVersion, String candidateVersion) {
 		ComponentSelection componentSelection = mock(ComponentSelection.class);
-		UpdateDependenciesExtension.DependencyExcludes excludes = new UpdateDependenciesExtension(() -> Collections.emptyList()).new DependencyExcludes();
+		UpdateDependenciesExtension.DependencyExcludes excludes = new UpdateDependenciesExtension(Collections::emptyList).new DependencyExcludes();
 		Action<ComponentSelectionWithCurrent> excludeMinorVersionBump = excludes.createExcludeMinorVersionBump();
 		ComponentSelectionWithCurrent selection = currentVersionAndCandidateVersion(componentSelection, currentVersion, candidateVersion);
 		excludeMinorVersionBump.execute(selection);

@@ -16,9 +16,9 @@ public class UpdateDependenciesExtension {
 
 	private UpdateMode updateMode = UpdateMode.COMMIT;
 
-	private DependencyExcludes dependencyExcludes = new DependencyExcludes();
+	private final DependencyExcludes dependencyExcludes = new DependencyExcludes();
 
-	private GitHub gitHub = new GitHub();
+	private final GitHub gitHub = new GitHub();
 
 	public UpdateDependenciesExtension(Supplier<List<File>> files) {
 		this.files = files;
@@ -133,7 +133,7 @@ public class UpdateDependenciesExtension {
 		}
 
 		public DependencyExcludes majorVersionBump() {
-			this.actions.add((selection) -> {
+			this.actions.add(selection -> {
 				String currentVersion = selection.getCurrentVersion();
 				int separator = currentVersion.indexOf(".");
 				String major = separator > 0 ? currentVersion.substring(0, separator) : currentVersion;
@@ -153,7 +153,7 @@ public class UpdateDependenciesExtension {
 		}
 
 		public Action<ComponentSelectionWithCurrent> createExcludeMinorVersionBump() {
-			return (selection) -> {
+			return selection -> {
 				String currentVersion = selection.getCurrentVersion();
 				int majorSeparator = currentVersion.indexOf(".");
 				int separator = currentVersion.indexOf(".", majorSeparator + 1);
@@ -187,7 +187,7 @@ public class UpdateDependenciesExtension {
 
 		private Action<ComponentSelectionWithCurrent> excludeVersionWithRegex(String regex, String reason) {
 			Pattern pattern = Pattern.compile(regex);
-			return (selection) -> {
+			return selection -> {
 				String candidateVersion = selection.getCandidate().getVersion();
 				if (pattern.matcher(candidateVersion).matches()) {
 					selection.reject(candidateVersion + " is not allowed because it is " + reason);

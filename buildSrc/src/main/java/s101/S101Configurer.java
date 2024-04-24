@@ -113,7 +113,7 @@ public class S101Configurer {
 
 	private void writeLicense(Path licenseFile, String licenseId) {
 		if (!this.licenseDirectory.toFile().mkdirs()) {
-			this.licenseDirectory.forEach((path) -> path.toFile().delete());
+			this.licenseDirectory.forEach(path -> path.toFile().delete());
 		}
 		try (PrintWriter pw = new PrintWriter(licenseFile.toFile())) {
 			pw.println("licensecode=" + licenseId);

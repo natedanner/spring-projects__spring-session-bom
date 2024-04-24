@@ -37,7 +37,7 @@ public class GitHubReleaseApi {
 	private String baseUrl = "https://api.github.com";
 
 	private final OkHttpClient httpClient;
-	private Gson gson = new Gson();
+	private final Gson gson = new Gson();
 
 	public GitHubReleaseApi(String gitHubAccessToken) {
 		this.httpClient = new OkHttpClient.Builder()

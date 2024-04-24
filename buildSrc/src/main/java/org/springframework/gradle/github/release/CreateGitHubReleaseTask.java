@@ -48,7 +48,7 @@ public class CreateGitHubReleaseTask extends DefaultTask {
 	private String branch = "main";
 
 	@Input
-	private boolean createRelease = false;
+	private boolean createRelease;
 
 	@TaskAction
 	public void createGitHubRelease() {

@@ -2,6 +2,7 @@ package org.springframework.security.convention.versions;
 
 import com.apollographql.apollo.ApolloCall;
 import com.apollographql.apollo.ApolloClient;
+import com.apollographql.apollo.api.Error;
 import com.apollographql.apollo.api.Input;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
@@ -44,7 +45,7 @@ public class GitHubApi {
 					@Override
 					public void onResponse(@NotNull Response<FindCreateIssueInputQuery.Data> response) {
 						if (response.hasErrors()) {
-							sink.error(new RuntimeException(response.getErrors().stream().map(e -> e.getMessage()).collect(Collectors.joining(" "))));
+							sink.error(new RuntimeException(response.getErrors().stream().map(Error::getMessage).collect(Collectors.joining(" "))));
 						} else {
 							FindCreateIssueInputQuery.Data data = response.getData();
 							FindCreateIssueInputQuery.Repository repository = data.repository();
@@ -107,7 +108,7 @@ public class GitHubApi {
 				@Override
 				public void onResponse(@NotNull Response<RateLimitQuery.Data> response) {
 					if (response.hasErrors()) {
-						sink.error(new RuntimeException(response.getErrors().stream().map(e -> e.getMessage()).collect(Collectors.joining(" "))));
+						sink.error(new RuntimeException(response.getErrors().stream().map(Error::getMessage).collect(Collectors.joining(" "))));
 					} else {
 						sink.success(response.getData().rateLimit());
 					}

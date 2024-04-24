@@ -36,7 +36,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 public class GitHubReleaseApiTests {
 	private GitHubReleaseApi github;
 
-	private RepositoryRef repository = new RepositoryRef("spring-projects", "spring-security");
+	private final RepositoryRef repository = new RepositoryRef("spring-projects", "spring-security");
 
 	private MockWebServer server;
 

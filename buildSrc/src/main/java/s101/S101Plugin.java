@@ -58,11 +58,11 @@ public class S101Plugin implements Plugin<Project> {
 				.classpath(new File(extension.getInstallationDirectory().get(), "structure101-java-build.jar"))
 				.args(new File(new File(project.getBuildDir(), "s101"), "config.xml"))
 				.systemProperty("s101.label", computeLabel(extension).get())
-				.doFirst((task) -> {
+				.doFirst(task -> {
 					installAndConfigureIfNeeded(project);
 					copyConfigurationToBuildDirectory(extension, project);
 				})
-				.doLast((task) -> {
+				.doLast(task -> {
 					copyResultsBackToConfigurationDirectory(extension, project);
 				});
 	}

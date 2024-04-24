@@ -36,7 +36,7 @@ class TransitiveDependencyLookupUtils {
 	static String OIDC_SDK_NAME = "oauth2-oidc-sdk";
 	static String NIMBUS_JOSE_JWT_NAME = "nimbus-jose-jwt";
 
-	private static OkHttpClient client = new OkHttpClient();
+	private static final OkHttpClient client = new OkHttpClient();
 
 	static String lookupJwtVersion(String oauthSdcVersion) {
 		Request request = new Request.Builder()

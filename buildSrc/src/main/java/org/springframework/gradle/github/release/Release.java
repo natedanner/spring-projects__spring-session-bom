@@ -21,7 +21,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * @author Steve Riesenberg
  */
-public class Release {
+public final class Release {
 	@SerializedName("tag_name")
 	private final String tag;
 

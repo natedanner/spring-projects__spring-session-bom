@@ -38,7 +38,7 @@ public abstract class UpdateToSnapshotVersionTask extends DefaultTask {
 		String nextVersion = calculateNextSnapshotVersion(currentVersion);
 		System.out.println("Updating the project version in " + Project.GRADLE_PROPERTIES + " from " + currentVersion
 				+ " to " + nextVersion);
-		FileUtils.replaceFileText(gradlePropertiesFile, (gradlePropertiesText) -> {
+		FileUtils.replaceFileText(gradlePropertiesFile, gradlePropertiesText -> {
 			gradlePropertiesText = gradlePropertiesText.replace("version=" + currentVersion, "version=" + nextVersion);
 			return gradlePropertiesText;
 		});
